@@ -12,7 +12,7 @@ import re
 import unittest
 import warnings
 
-import junit_xml as junit
+import junitxml as junit
 
 from elbepack.shellhelper import command_out
 
