@@ -29,6 +29,7 @@ jobs:
       with:
         docker-image: debian:stable-slim
         artifacts-dir: stable
+	buildpackage-opts: -nc
 
     - name: Retrieve results
       if: ${{ always() }}
@@ -49,6 +50,7 @@ jobs:
       with:
         docker-image: debian:unstable-slim
         artifacts-dir: unstable
+	buildpackage-opts: -nc
 
     - name: Retrieve results
       if: ${{ always() }}
@@ -65,7 +67,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install tools
-      run: sudo apt-get install -y config-package-dev devscripts git-buildpackage lighttpd reprepro
+      run: sudo apt-get install -y config-package-dev devscripts git-buildpackage lighttpd reprepro python3-pip
 
     - name: Create build environment
       run: ARCH="$(dpkg-architecture -q DEB_BUILD_ARCH)" DIST="$(. /etc/os-release; echo ${VERSION_CODENAME/*, /})" git-pbuilder create
